@@ -9,19 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        
+        // this stack contains all UI elements in the view
         ZStack {
             
             Color.green.ignoresSafeArea()
             
             VStack {
+                
                 Image("logo")
                 
                 HStack{
-                    
                     Image("card2")
                     
                     Image("card2")
-                }
+                } // HSTACK : END
                 
                 Button {
                     
@@ -33,17 +35,17 @@ struct ContentView: View {
                     VStack{
                         Text("Player")
                         Text("0")
-                    }
+                    } // VSTACK : END
                     
                     VStack{
                         Text("Player")
                         Text("0")
-                    }
-                }
-
-                    
-            }
-        }
+                    } // VSTACK : END
+                } // HSTACK : END
+                
+                
+            } // VSTACK : END
+        } // ZSTACK : END
     }
 }
 

@@ -8,22 +8,46 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var lightGreenBackground: Color = Color(
+        red: 139/255,
+        green: 195/255,
+        blue: 74/255)
+    
+    @State var darkGreenBackground: Color = Color(
+        red: 56/255,
+        green: 142/255,
+        blue: 60/255)
+    
+    
     var body: some View {
         
         // this stack contains all UI elements in the view
         ZStack {
             
-            Color.green.ignoresSafeArea()
+            RadialGradient(
+                colors: [lightGreenBackground, darkGreenBackground],
+                center: .top,
+                startRadius: 20,
+                endRadius: 400).ignoresSafeArea()
+                
             
             VStack {
                 
+                Spacer()
+                
                 Image("logo")
                 
+                Spacer()
+                
                 HStack{
-                    Image("card2")
-                    
-                    Image("card2")
+                    Spacer()
+                    Image("back")
+                    Spacer()
+                    Image("back")
+                    Spacer()
                 } // HSTACK : END
+                
+                Spacer()
                 
                 Button {
                     
@@ -31,18 +55,33 @@ struct ContentView: View {
                     Image("button")
                 }
                 
+                Spacer()
+                
                 HStack {
-                    VStack{
+                    
+                    Spacer()
+                    
+                    VStack(spacing: 10){
                         Text("Player")
                         Text("0")
+                            .font(.title)
                     } // VSTACK : END
                     
-                    VStack{
-                        Text("Player")
+                    Spacer()
+                    
+                    VStack(spacing: 10){
+                        Text("CPU")
                         Text("0")
+                            .font(.title)
                     } // VSTACK : END
+                    
+                    Spacer()
+                    
                 } // HSTACK : END
+                .foregroundColor(.white)
+                .fontWeight(.bold)
                 
+                Spacer()
                 
             } // VSTACK : END
         } // ZSTACK : END

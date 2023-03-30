@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var lightGreenBackground: Color = Color(
+    var lightGreenBackground: Color = Color(
         red: 139/255,
         green: 195/255,
         blue: 74/255)
     
-    @State var darkGreenBackground: Color = Color(
+    var darkGreenBackground: Color = Color(
         red: 56/255,
         green: 142/255,
         blue: 60/255)
+    
+    var playerCard = "card5"
+    var CPUCard = "card6"
+    
+    var playScore = 0
+    var CPUScore = 0
     
     
     var body: some View {
@@ -41,16 +47,16 @@ struct ContentView: View {
                 
                 HStack{
                     Spacer()
-                    Image("back")
+                    Image(playerCard)
                     Spacer()
-                    Image("back")
+                    Image(CPUCard)
                     Spacer()
                 } // HSTACK : END
                 
                 Spacer()
                 
                 Button {
-                    
+                    deal()
                 } label: {
                     Image("button")
                 }
@@ -63,7 +69,7 @@ struct ContentView: View {
                     
                     VStack(spacing: 10){
                         Text("Player")
-                        Text("0")
+                        Text(String(playScore))
                             .font(.title)
                     } // VSTACK : END
                     
@@ -71,7 +77,7 @@ struct ContentView: View {
                     
                     VStack(spacing: 10){
                         Text("CPU")
-                        Text("0")
+                        Text(String(CPUScore))
                             .font(.title)
                     } // VSTACK : END
                     
@@ -85,6 +91,10 @@ struct ContentView: View {
                 
             } // VSTACK : END
         } // ZSTACK : END
+    }
+    
+    func deal() {
+        
     }
 }
 

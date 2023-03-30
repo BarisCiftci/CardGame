@@ -37,6 +37,7 @@ struct ContentView: View {
                 center: .top,
                 startRadius: 20,
                 endRadius: 400).ignoresSafeArea()
+            
                 
             
             VStack {
@@ -47,13 +48,14 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                HStack{
-                    Spacer()
+                HStack(spacing: 16){
                     Image(playerCard)
-                    Spacer()
+                        .resizable()
                     Image(cpuCard)
-                    Spacer()
+                        .resizable()
                 } // HSTACK : END
+                .scaledToFit()
+                .padding()
                 
                 Spacer()
                 

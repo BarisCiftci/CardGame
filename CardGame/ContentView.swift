@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // Background gradient colors
     var lightGreenBackground: Color = Color(
         red: 139/255,
         green: 195/255,
@@ -18,11 +20,11 @@ struct ContentView: View {
         green: 142/255,
         blue: 60/255)
     
-    var playerCard = "card5"
-    var CPUCard = "card6"
+    @ State var playerCard = "card5"
+    @ State var cpuCard = "card6"
     
-    var playScore = 0
-    var CPUScore = 0
+    @ State var playScore = 0
+    @ State var CPUScore = 0
     
     
     var body: some View {
@@ -49,7 +51,7 @@ struct ContentView: View {
                     Spacer()
                     Image(playerCard)
                     Spacer()
-                    Image(CPUCard)
+                    Image(cpuCard)
                     Spacer()
                 } // HSTACK : END
                 
@@ -94,7 +96,26 @@ struct ContentView: View {
     }
     
     func deal() {
+        // Randomize the player's card
+        let playerCardValue = Int.random(in: 2...14)
+        cpuCard = "card" + String(playerCardValue)
         
+        // Randomize the CPU's card
+        let cpuCardValue = Int.random(in: 2...14)
+        playerCard = "card" + String(cpuCardValue)
+        
+        // Update the scores
+        if playerCardValue > cpuCardValue {
+            
+            // Add +1 to player
+            playScore += 1
+        } else if playerCardValue < cpuCardValue {
+            
+            // Add +1 to CPU
+            CPUScore += 1
+        } else {
+            
+        }
     }
 }
 

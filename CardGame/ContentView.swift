@@ -68,14 +68,7 @@ struct ContentView: View {
                 Button {
                     dealButtonAction()
                 } label: {
-                    Text("DEAL")
-                        .font(.custom("Optima".uppercased(), size: 38))
-                        .fontWeight(.heavy)
-                        .foregroundColor(.black)
-                        .padding()
-                        .padding(.horizontal, 30)
-                        .background(Capsule())
-                        .foregroundColor(.white)
+                    CardGameDealButton()
                         
                 }
                 

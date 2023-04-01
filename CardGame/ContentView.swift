@@ -11,20 +11,23 @@ struct ContentView: View {
     
     // Background gradient colors
     var lightGreenBackground: Color = Color(
-        red: 139/255,
-        green: 195/255,
-        blue: 74/255)
+        red: 12/255,
+        green: 119/255,
+        blue: 0/255)
     
     var darkGreenBackground: Color = Color(
-        red: 56/255,
-        green: 142/255,
-        blue: 60/255)
+        red: 8/255,
+        green: 68/255,
+        blue: 0/255)
     
-    @ State var playerCard = "card5"
-    @ State var cpuCard = "card6"
+    @State var playerCard = "card5"
+    @State var cpuCard = "card6"
     
-    @ State var playScore = 0
-    @ State var CPUScore = 0
+    @State var playScore = 0
+    @State var CPUScore = 0
+    
+    @State var CPURotationAngle = 0
+    @State var PlayerRotationAngle = 0
     
     
     var body: some View {
@@ -34,9 +37,9 @@ struct ContentView: View {
             
             RadialGradient(
                 colors: [lightGreenBackground, darkGreenBackground],
-                center: .top,
-                startRadius: 20,
-                endRadius: 400).ignoresSafeArea()
+                center: .topLeading,
+                startRadius: 120,
+                endRadius: 670).ignoresSafeArea()
             
                 
             
@@ -45,17 +48,24 @@ struct ContentView: View {
                 Spacer()
                 
                 Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 320)
                 
                 Spacer()
                 
-                HStack(spacing: 16){
+                HStack(spacing: 30){
                     Image(playerCard)
                         .resizable()
+                        .rotationEffect(Angle(degrees: Double(PlayerRotationAngle)))
                     Image(cpuCard)
                         .resizable()
+                        .rotationEffect(Angle(degrees: Double(CPURotationAngle)))
+                        .transition(AnyTransition.slide)
                 } // HSTACK : END
                 .scaledToFit()
-                .padding()
+                .padding(30)
+                .shadow(color: .black, radius: 4, x: 1, y: 1)
                 
                 Spacer()
                 
@@ -63,6 +73,9 @@ struct ContentView: View {
                     deal()
                 } label: {
                     Image("button")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200)
                 }
                 
                 Spacer()
@@ -98,6 +111,9 @@ struct ContentView: View {
     }
     
     func deal() {
+        // Rotation Angle
+        CPURotationAngle = Int.random(in: 0...180)
+        PlayerRotationAngle = Int.random(in: 0...180)
         // Randomize the player's card
         let playerCardValue = Int.random(in: 2...14)
         cpuCard = "card" + String(playerCardValue)

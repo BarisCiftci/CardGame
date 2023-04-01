@@ -29,7 +29,6 @@ struct ContentView: View {
     @State var CPURotationAngle = 0
     @State var PlayerRotationAngle = 0
     
-    
     var body: some View {
         
         // this stack contains all UI elements in the view
@@ -47,10 +46,7 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Image("logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 320)
+                CardGameLogo()
                 
                 Spacer()
                 
@@ -70,12 +66,17 @@ struct ContentView: View {
                 Spacer()
                 
                 Button {
-                    deal()
+                    dealButtonAction()
                 } label: {
-                    Image("button")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
+                    Text("DEAL")
+                        .font(.custom("Optima".uppercased(), size: 38))
+                        .fontWeight(.heavy)
+                        .foregroundColor(.black)
+                        .padding()
+                        .padding(.horizontal, 30)
+                        .background(Capsule())
+                        .foregroundColor(.white)
+                        
                 }
                 
                 Spacer()
@@ -88,6 +89,7 @@ struct ContentView: View {
                         Text("Player")
                         Text(String(playScore))
                             .font(.title)
+                            
                     } // VSTACK : END
                     
                     Spacer()
@@ -110,10 +112,10 @@ struct ContentView: View {
         } // ZSTACK : END
     }
     
-    func deal() {
+    func dealButtonAction() {
         // Rotation Angle
-        CPURotationAngle = Int.random(in: 0...180)
-        PlayerRotationAngle = Int.random(in: 0...180)
+        CPURotationAngle = Int.random(in: -30...30)
+        PlayerRotationAngle = Int.random(in: -30...30)
         // Randomize the player's card
         let playerCardValue = Int.random(in: 2...14)
         cpuCard = "card" + String(playerCardValue)
@@ -135,6 +137,7 @@ struct ContentView: View {
             
         }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

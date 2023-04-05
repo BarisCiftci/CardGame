@@ -29,6 +29,7 @@ struct ContentView: View {
     @State var CPURotationAngle = 0
     @State var PlayerRotationAngle = 0
     
+    
     var body: some View {
         
         // this stack contains all UI elements in the view
@@ -43,7 +44,6 @@ struct ContentView: View {
                 
             
             VStack {
-                
                 Spacer()
                 
                 CardGameLogo()
@@ -106,6 +106,11 @@ struct ContentView: View {
     }
     
     func dealButtonAction() {
+        //Vibrate the phone
+        let haptic = UIImpactFeedbackGenerator(style: .heavy)
+
+        haptic.impactOccurred()
+        
         // Rotation Angle
         CPURotationAngle = Int.random(in: -30...30)
         PlayerRotationAngle = Int.random(in: -30...30)

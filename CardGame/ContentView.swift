@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct ContentView: View {
     
@@ -20,21 +21,28 @@ struct ContentView: View {
         green: 68/255,
         blue: 0/255)
     
-    @State var playerCard = "card5"
-    @State var cpuCard = "card6"
+    @State var playerCard = "back"
+    @State var cpuCard = "back"
     
-    @State var playScore = 0
-    @State var CPUScore = 0
+    @State var playerScore = 0
+    @State var cpuScore = 0
     
-    @State var CPURotationAngle = 0
+    @State var cpuRotationAngle = 0
     @State var PlayerRotationAngle = 0
+
+    @State var playerWonAlert = false
     
+    @State var wonMessage: String = ""
+    
+    let player = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "sound", ofType: "mp3")!))
     
     var body: some View {
         
+        
+        
         // this stack contains all UI elements in the view
         ZStack {
-            
+            //Background gradient
             RadialGradient(
                 colors: [lightGreenBackground, darkGreenBackground],
                 center: .topLeading,
@@ -54,9 +62,10 @@ struct ContentView: View {
                     Image(playerCard)
                         .resizable()
                         .rotationEffect(Angle(degrees: Double(PlayerRotationAngle)))
+                        
                     Image(cpuCard)
                         .resizable()
-                        .rotationEffect(Angle(degrees: Double(CPURotationAngle)))
+                        .rotationEffect(Angle(degrees: Double(cpuRotationAngle)))
                         .transition(AnyTransition.slide)
                 } // HSTACK : END
                 .scaledToFit()
@@ -67,10 +76,33 @@ struct ContentView: View {
                 
                 Button {
                     dealButtonAction()
+                    wonAlert()
+                    
                 } label: {
                     CardGameDealButton()
                         
                 }
+                
+                .alert(isPresented: $playerWonAlert, content: {
+                    
+                    Alert(
+                        title: Text("THE WINNER IS!"),
+                        message: Text(wonMessage),
+                        primaryButton: .destructive(Text("Exit"), action: {
+                        
+                        }),
+                        secondaryButton: .destructive(Text("Reset Score"), action: {
+                            playerScore = 0
+                            cpuScore = 0
+                            
+                            cpuCard = "back"
+                            playerCard = "back"
+                            
+                            cpuRotationAngle = 0
+                            PlayerRotationAngle = 0
+                        }))
+                })
+                
                 
                 Spacer()
                 
@@ -80,7 +112,7 @@ struct ContentView: View {
                     
                     VStack(spacing: 10){
                         Text("Player")
-                        Text(String(playScore))
+                        Text(String(playerScore))
                             .font(.title)
                             
                     } // VSTACK : END
@@ -89,7 +121,7 @@ struct ContentView: View {
                     
                     VStack(spacing: 10){
                         Text("CPU")
-                        Text(String(CPUScore))
+                        Text(String(cpuScore))
                             .font(.title)
                     } // VSTACK : END
                     
@@ -105,15 +137,36 @@ struct ContentView: View {
         } // ZSTACK : END
     }
     
+    
+    func wonAlert() {
+        
+        let generator = UINotificationFeedbackGenerator()
+        
+        if cpuScore >= 5 {
+            playerWonAlert = true
+            generator.notificationOccurred(.warning)
+            wonMessage = "CPU"
+        } else if playerScore >= 5 {
+            playerWonAlert = true
+            generator.notificationOccurred(.success)
+            wonMessage = "PLAYER"
+            player.play()
+        }
+        
+    }
+    
+    
     func dealButtonAction() {
+        
         //Vibrate the phone
-        let haptic = UIImpactFeedbackGenerator(style: .heavy)
+        let haptic = UIImpactFeedbackGenerator(style: .light)
 
         haptic.impactOccurred()
         
         // Rotation Angle
-        CPURotationAngle = Int.random(in: -30...30)
+        cpuRotationAngle = Int.random(in: -30...30)
         PlayerRotationAngle = Int.random(in: -30...30)
+        
         // Randomize the player's card
         let playerCardValue = Int.random(in: 2...14)
         cpuCard = "card" + String(playerCardValue)
@@ -121,20 +174,22 @@ struct ContentView: View {
         // Randomize the CPU's card
         let cpuCardValue = Int.random(in: 2...14)
         playerCard = "card" + String(cpuCardValue)
-        
+    
         // Update the scores
         if playerCardValue > cpuCardValue {
             
             // Add +1 to player
-            playScore += 1
+            playerScore += 1
         } else if playerCardValue < cpuCardValue {
             
             // Add +1 to CPU
-            CPUScore += 1
+            cpuScore += 1
         } else {
             
         }
     }
+    
+    
     
 }
 

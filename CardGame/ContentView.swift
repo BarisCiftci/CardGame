@@ -24,8 +24,8 @@ struct ContentView: View {
     @State var playerCard = "back"
     @State var cpuCard = "back"
     
-    @State var playerScore = 0
-    @State var cpuScore = 0
+    @AppStorage("playerScore") var playerScore: Int = 0
+    @AppStorage("cpuScore") var cpuScore: Int = 0
     
     @State var cpuRotationAngle = 0
     @State var PlayerRotationAngle = 0

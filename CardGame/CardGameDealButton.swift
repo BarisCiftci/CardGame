@@ -22,14 +22,15 @@ struct CardGameDealButton: View {
             }
             
         }
+        
         .frame(height: 60)
-        .frame(minWidth: 120, maxWidth: 180)
         .padding(.horizontal, 80)
     }
     
     struct CardGameDealButton_Previews: PreviewProvider {
         static var previews: some View {
             CardGameDealButton()
+                .previewLayout(.sizeThatFits)
         }
     }
 }

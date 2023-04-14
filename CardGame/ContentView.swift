@@ -77,27 +77,26 @@ struct ContentView: View {
                 Button {
                     dealButtonAction()
                     wonAlert()
-                    
                 } label: {
                     CardGameDealButton()
                         
                 }
                 
                 .alert(isPresented: $playerWonAlert, content: {
-                    
+
                     Alert(
                         title: Text("THE WINNER IS!"),
                         message: Text(wonMessage),
-                        primaryButton: .destructive(Text("Exit"), action: {
-                        
+                        primaryButton: .default(Text("Close App"), action: {
+
                         }),
                         secondaryButton: .destructive(Text("Reset Score"), action: {
                             playerScore = 0
                             cpuScore = 0
-                            
+
                             cpuCard = "back"
                             playerCard = "back"
-                            
+
                             cpuRotationAngle = 0
                             PlayerRotationAngle = 0
                         }))
@@ -140,15 +139,15 @@ struct ContentView: View {
     
     func wonAlert() {
         
-        let generator = UINotificationFeedbackGenerator()
+        let winnerHapticResponse = UINotificationFeedbackGenerator()
         
         if cpuScore >= 5 {
             playerWonAlert = true
-            generator.notificationOccurred(.warning)
+            winnerHapticResponse.notificationOccurred(.warning)
             wonMessage = "CPU"
         } else if playerScore >= 5 {
             playerWonAlert = true
-            generator.notificationOccurred(.success)
+            winnerHapticResponse.notificationOccurred(.success)
             wonMessage = "PLAYER"
             player.play()
         }
@@ -178,11 +177,11 @@ struct ContentView: View {
         // Update the scores
         if playerCardValue > cpuCardValue {
             
-            // Add +1 to player
+        // Add +1 to player
             playerScore += 1
         } else if playerCardValue < cpuCardValue {
             
-            // Add +1 to CPU
+        // Add +1 to CPU
             cpuScore += 1
         } else {
             

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardGameLogo: View {
     
-    var strokeLine = 10
+    var strokeLine = 8
     
     var body: some View {
         ZStack {
@@ -72,11 +72,13 @@ struct CardGameLogo: View {
            
         }
         
+        
     }
 }
 
 struct GardGameLogo_Previews: PreviewProvider {
     static var previews: some View {
         CardGameLogo()
+            .previewLayout(.sizeThatFits)
     }
 }

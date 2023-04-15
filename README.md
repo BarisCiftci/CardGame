@@ -36,3 +36,4 @@ func dealButtonAction() {
         }
     }
 ![image](https://user-images.githubusercontent.com/65560636/232248026-1f6c0df9-15d3-4969-855b-5f936de5d3b8.png)
+![image](https://user-images.githubusercontent.com/65560636/232248748-6ab2aebf-ad0c-4a65-82fd-da1282b97d79.png)

@@ -36,7 +36,7 @@ struct ContentView: View {
 
     @State var displayWinAlert = false
     
-    @State var winMessage: String = ""
+    @State var winnerName: String = ""
    
     var body: some View {
         // this stack contains all UI elements in the view
@@ -83,7 +83,7 @@ struct ContentView: View {
 
                     Alert(
                         title: Text("THE WINNER IS!"),
-                        message: Text(winMessage),
+                        message: Text(winnerName),
                         primaryButton: .default(Text("Close App"), action: {
 
                         }),
@@ -140,11 +140,11 @@ struct ContentView: View {
         if cpuScore >= 5 {
             displayWinAlert = true
             winnerHapticResponse.notificationOccurred(.warning)
-            winMessage = playerNameCpu
+            winnerName = playerNameCpu
         } else if playerScore >= 5 {
             displayWinAlert = true
             winnerHapticResponse.notificationOccurred(.success)
-            winMessage = playerNameUser
+            winnerName = playerNameUser
             player.play()
         }
         
@@ -177,9 +177,7 @@ struct ContentView: View {
         // Update the scores
         if cpuCardValue > playerCardValue {
             cpuScore += 1
-        }
-        
-        if playerCardValue > cpuCardValue {
+        } else if playerCardValue > cpuCardValue {
             playerScore += 1
         }
 

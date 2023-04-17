@@ -110,7 +110,7 @@ struct ContentView: View {
                     Spacer()
                     
                     VStack(spacing: 10){
-                        Text("Player")
+                        Text("CPU")
                         Text(String(playerScore))
                             .font(.title)
                             
@@ -119,7 +119,7 @@ struct ContentView: View {
                     Spacer()
                     
                     VStack(spacing: 10){
-                        Text("CPU")
+                        Text("Player")
                         Text(String(cpuScore))
                             .font(.title)
                     } // VSTACK : END

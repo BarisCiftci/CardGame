@@ -24,6 +24,9 @@ struct ContentView: View {
     @State var playerCard = "back"
     @State var cpuCard = "back"
     
+    let playerNameUser = "PLAYER"
+    let playerNameCpu = "CPU"
+    
     @AppStorage("playerScore") var playerScore: Int = 0
     @AppStorage("cpuScore") var cpuScore: Int = 0
     
@@ -110,7 +113,7 @@ struct ContentView: View {
                     Spacer()
                     
                     VStack(spacing: 10){
-                        Text("CPU")
+                        Text(playerNameCpu)
                         Text(String(cpuScore))
                             .font(.title)
                             
@@ -119,7 +122,7 @@ struct ContentView: View {
                     Spacer()
                     
                     VStack(spacing: 10){
-                        Text("Player")
+                        Text(playerNameUser)
                         Text(String(playerScore))
                             .font(.title)
                     } // VSTACK : END
@@ -144,11 +147,11 @@ struct ContentView: View {
         if cpuScore >= 5 {
             playerWonAlert = true
             winnerHapticResponse.notificationOccurred(.warning)
-            wonMessage = "CPU"
+            wonMessage = playerNameCpu
         } else if playerScore >= 5 {
             playerWonAlert = true
             winnerHapticResponse.notificationOccurred(.success)
-            wonMessage = "PLAYER"
+            wonMessage = playerNameUser
             player.play()
         }
         

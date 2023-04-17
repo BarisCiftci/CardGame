@@ -99,10 +99,17 @@ struct ContentView: View {
                         }))
                 })
                 
-                
                 Spacer()
                 
                 HStack {
+                    
+                    Spacer()
+                    
+                    VStack(spacing: 10){
+                        Text(playerNameUser)
+                        Text("\(playerScore)")
+                            .font(.title)
+                    }
                     
                     Spacer()
                     
@@ -112,13 +119,6 @@ struct ContentView: View {
                             .font(.title)
                     }
                     
-                    Spacer()
-                    
-                    VStack(spacing: 10){
-                        Text(playerNameUser)
-                        Text("\(playerScore)")
-                            .font(.title)
-                    }
                     
                     Spacer()
                     
@@ -166,28 +166,25 @@ struct ContentView: View {
         cpuRotationAngle = Int.random(in: -30...30)
         PlayerRotationAngle = Int.random(in: -30...30)
         
-        // Randomize the player's card
+        // Randomize the cpu's card
         let cpuCardValue = Int.random(in: 2...14)
         cpuCard = getCardFor(cardValue: cpuCardValue)
         
-        // Randomize the CPU's card
+        // Randomize the player's card
         let playerCardValue = Int.random(in: 2...14)
         playerCard = getCardFor(cardValue: playerCardValue)
     
         // Update the scores
-        if playerCardValue > cpuCardValue {
-            
-        // Add +1 to player
-            playerScore += 1
-        } else if playerCardValue < cpuCardValue {
-            
-        // Add +1 to CPU
+        if cpuCardValue > playerCardValue {
             cpuScore += 1
         }
+        
+        if playerCardValue > cpuCardValue {
+            playerScore += 1
+        }
+
     }
-    
-    
-    
+     
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -24,8 +24,8 @@ struct ContentView: View {
     @State var playerCard = "back"
     @State var cpuCard = "back"
     
-    let playerNameUser = "PLAYER"
-    let playerNameCpu = "CPU"
+    let playerNameUser = "Human"
+    let playerNameCpu = "ChatGPT"
     
     @AppStorage("playerScore") var playerScore: Int = 0
     @AppStorage("cpuScore") var cpuScore: Int = 0

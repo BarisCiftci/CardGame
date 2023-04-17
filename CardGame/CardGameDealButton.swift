@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CardGameDealButton: View {
+    
+    private let buttonText = "DEAL"
+    
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 12)
@@ -15,22 +18,20 @@ struct CardGameDealButton: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.white)
             HStack {
-                Text("DEAL")
+                Text(buttonText)
                     .font(.custom("Optima", size: 28))
                     .fontWeight(.black)
                     .foregroundColor(.red)
             }
-            
         }
-        
         .frame(height: 60)
         .padding(.horizontal, 80)
     }
-    
-    struct CardGameDealButton_Previews: PreviewProvider {
-        static var previews: some View {
-            CardGameDealButton()
-                .previewLayout(.sizeThatFits)
-        }
+}
+
+struct CardGameDealButton_Previews: PreviewProvider {
+    static var previews: some View {
+        CardGameDealButton()
+            .previewLayout(.sizeThatFits)
     }
 }

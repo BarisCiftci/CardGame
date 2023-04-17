@@ -9,7 +9,10 @@ import SwiftUI
 
 struct CardGameLogo: View {
     
-    var strokeLine = 8
+    private let strokeLine = 8
+    
+    private let logoFirstName = "CARD"
+    private let logoSecondName = "GAME"
     
     var body: some View {
         ZStack {
@@ -19,16 +22,15 @@ struct CardGameLogo: View {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color.white)
                 HStack {
-                    Text("CARD")
+                    Text(logoFirstName)
                         .font(.custom("Optima", size: 28))
                         .fontWeight(.black)
                     
                     Spacer()
                     
-                    Text("GAME")
+                    Text(logoSecondName)
                         .font(.custom("Optima", size: 28))
                         .fontWeight(.black)
-                
                 }
                 .foregroundColor(.red)
                 .padding(.horizontal)
@@ -68,11 +70,7 @@ struct CardGameLogo: View {
                 .rotationEffect(Angle(degrees: 0))
             }
                 .frame(width: 80, height: 110)
-            
-           
         }
-        
-        
     }
 }
 

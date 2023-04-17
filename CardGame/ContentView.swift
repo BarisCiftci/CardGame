@@ -26,6 +26,7 @@ struct ContentView: View {
     
     let playerNameUser = "Human"
     let playerNameCpu = "ChatGPT"
+    let player = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "sound", ofType: "mp3")!))
     
     @AppStorage("playerScore") var playerScore: Int = 0
     @AppStorage("cpuScore") var cpuScore: Int = 0
@@ -33,16 +34,11 @@ struct ContentView: View {
     @State var cpuRotationAngle = 0
     @State var PlayerRotationAngle = 0
 
-    @State var playerWonAlert = false
+    @State var displayWinAlert = false
     
-    @State var wonMessage: String = ""
-    
-    let player = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "sound", ofType: "mp3")!))
-    
+    @State var winMessage: String = ""
+   
     var body: some View {
-        
-        
-        
         // this stack contains all UI elements in the view
         ZStack {
             //Background gradient
@@ -51,8 +47,6 @@ struct ContentView: View {
                 center: .topLeading,
                 startRadius: 120,
                 endRadius: 670).ignoresSafeArea()
-            
-                
             
             VStack {
                 Spacer()
@@ -70,7 +64,7 @@ struct ContentView: View {
                         .resizable()
                         .rotationEffect(Angle(degrees: Double(cpuRotationAngle)))
                         .transition(AnyTransition.slide)
-                } // HSTACK : END
+                }
                 .scaledToFit()
                 .padding(30)
                 .shadow(color: .black, radius: 4, x: 1, y: 1)
@@ -85,11 +79,11 @@ struct ContentView: View {
                         
                 }
                 
-                .alert(isPresented: $playerWonAlert, content: {
+                .alert(isPresented: $displayWinAlert, content: {
 
                     Alert(
                         title: Text("THE WINNER IS!"),
-                        message: Text(wonMessage),
+                        message: Text(winMessage),
                         primaryButton: .default(Text("Close App"), action: {
 
                         }),
@@ -114,29 +108,28 @@ struct ContentView: View {
                     
                     VStack(spacing: 10){
                         Text(playerNameCpu)
-                        Text(String(cpuScore))
+                        Text("\(cpuScore)")
                             .font(.title)
-                            
-                    } // VSTACK : END
+                    }
                     
                     Spacer()
                     
                     VStack(spacing: 10){
                         Text(playerNameUser)
-                        Text(String(playerScore))
+                        Text("\(playerScore)")
                             .font(.title)
-                    } // VSTACK : END
+                    }
                     
                     Spacer()
                     
-                } // HSTACK : END
+                }
                 .foregroundColor(.white)
                 .fontWeight(.bold)
                 
                 Spacer()
                 
-            } // VSTACK : END
-        } // ZSTACK : END
+            }
+        }
     }
     
     
@@ -145,16 +138,20 @@ struct ContentView: View {
         let winnerHapticResponse = UINotificationFeedbackGenerator()
         
         if cpuScore >= 5 {
-            playerWonAlert = true
+            displayWinAlert = true
             winnerHapticResponse.notificationOccurred(.warning)
-            wonMessage = playerNameCpu
+            winMessage = playerNameCpu
         } else if playerScore >= 5 {
-            playerWonAlert = true
+            displayWinAlert = true
             winnerHapticResponse.notificationOccurred(.success)
-            wonMessage = playerNameUser
+            winMessage = playerNameUser
             player.play()
         }
         
+    }
+    
+    func getCardFor(cardValue: Int) -> String {
+        return "card" + String(cardValue)
     }
     
     
@@ -170,12 +167,12 @@ struct ContentView: View {
         PlayerRotationAngle = Int.random(in: -30...30)
         
         // Randomize the player's card
-        let playerCardValue = Int.random(in: 2...14)
-        cpuCard = "card" + String(playerCardValue)
+        let cpuCardValue = Int.random(in: 2...14)
+        cpuCard = getCardFor(cardValue: cpuCardValue)
         
         // Randomize the CPU's card
-        let cpuCardValue = Int.random(in: 2...14)
-        playerCard = "card" + String(cpuCardValue)
+        let playerCardValue = Int.random(in: 2...14)
+        playerCard = getCardFor(cardValue: playerCardValue)
     
         // Update the scores
         if playerCardValue > cpuCardValue {
@@ -186,8 +183,6 @@ struct ContentView: View {
             
         // Add +1 to CPU
             cpuScore += 1
-        } else {
-            
         }
     }
     

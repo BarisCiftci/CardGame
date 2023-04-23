@@ -10,23 +10,8 @@ import AVFoundation
 
 struct ContentView: View {
     
-    // Background gradient colors
-    var lightGreenBackground: Color = Color(
-        red: 12/255,
-        green: 119/255,
-        blue: 0/255)
-    
-    var darkGreenBackground: Color = Color(
-        red: 8/255,
-        green: 68/255,
-        blue: 0/255)
-    
     @State var playerCard = "back"
     @State var cpuCard = "back"
-    
-    let playerNameUser = "Human"
-    let playerNameCpu = "ChatGPT"
-    let player = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "sound", ofType: "mp3")!))
     
     @AppStorage("playerScore") var playerScore: Int = 0
     @AppStorage("cpuScore") var cpuScore: Int = 0

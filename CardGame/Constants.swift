@@ -23,3 +23,11 @@ let darkGreenBackground: Color = Color(
 let playerNameUser = "Human"
 let playerNameCpu = "ChatGPT"
 let player = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "sound", ofType: "mp3")!))
+
+let strokeLine = 8
+
+let logoFirstName = "CARD"
+let logoSecondName = "GAME"
+
+let buttonText = "DEAL"
+

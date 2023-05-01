@@ -9,11 +9,6 @@ import SwiftUI
 
 struct CardGameLogo: View {
     
-    private let strokeLine = 8
-    
-    private let logoFirstName = "CARD"
-    private let logoSecondName = "GAME"
-    
     var body: some View {
         ZStack {
             ZStack{

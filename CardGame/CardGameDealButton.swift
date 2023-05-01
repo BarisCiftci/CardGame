@@ -9,8 +9,6 @@ import SwiftUI
 
 struct CardGameDealButton: View {
     
-    private let buttonText = "DEAL"
-    
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 12)

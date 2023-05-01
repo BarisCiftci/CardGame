@@ -30,7 +30,7 @@ struct ContentView: View {
         ZStack {
             //Background gradient
             RadialGradient(
-                colors: [lightGreenBackground, darkGreenBackground],
+                colors: [Color(UIColor(named: "BackgroundLight")!), Color(UIColor(named: "BackgroundDark")!)],
                 center: .topLeading,
                 startRadius: 120,
                 endRadius: 670).ignoresSafeArea()

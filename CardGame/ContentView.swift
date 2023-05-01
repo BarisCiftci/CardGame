@@ -23,6 +23,8 @@ struct ContentView: View {
     
     @State var winnerName: String = ""
    
+    
+    
     var body: some View {
         // this stack contains all UI elements in the view
         ZStack {
@@ -66,22 +68,7 @@ struct ContentView: View {
                 
                 .alert(isPresented: $displayWinAlert, content: {
 
-                    Alert(
-                        title: Text("THE WINNER IS!"),
-                        message: Text(winnerName),
-                        primaryButton: .default(Text("Close App"), action: {
-
-                        }),
-                        secondaryButton: .destructive(Text("Reset Score"), action: {
-                            playerScore = 0
-                            cpuScore = 0
-
-                            cpuCard = "back"
-                            playerCard = "back"
-
-                            cpuRotationAngle = 0
-                            PlayerRotationAngle = 0
-                        }))
+                    winnerAlert()
                 })
                 
                 Spacer()
@@ -166,6 +153,25 @@ struct ContentView: View {
             playerScore += 1
         }
 
+    }
+    
+    func winnerAlert() -> Alert {
+        return Alert(
+            title: Text("THE WINNER IS!"),
+            message: Text(winnerName),
+            primaryButton: .default(Text("Close App"), action: {
+                
+            }),
+            secondaryButton: .destructive(Text("Reset Score"), action: {
+                playerScore = 0
+                cpuScore = 0
+                
+                cpuCard = "back"
+                playerCard = "back"
+                
+                cpuRotationAngle = 0
+                PlayerRotationAngle = 0
+            }))
     }
      
 }
